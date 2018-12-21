@@ -1,7 +1,5 @@
 package org.faceftw.foilsimremastered.math;
 
-import org.faceftw.foilsimremastered.Constants.Planet;
-
 /* Convert Class
  * ========================= 
  * As mentioned in other files, the overall organization for methods is needed,
@@ -21,28 +19,15 @@ public class Convert {
 	//For Freedom Units given input data
 	private static final double FREEDOM_LENGTH_MOD  = 1;			//Feet
 	private static final double FREEDOM_VELOCITY_MOD =.6818;		//mph
-	private static final double FREEDOM_VELOCITY_MAX = 250.;		//mph, Unknown purpose atm
 	private static final double FREEDOM_WEIGHT_MOD = 1.0;			//lbs
-	private static final double FREEDOM_WEIGHT_MAX = 100000.;		//lbs
-	private static final double FREEDOM_WEIGHT_MAX_B = .5;			//lbs
 	private static final double FREEDOM_PRESSURE_MOD = 14.7;		//lb/(in^2)
 	
 	//For Metric Units given input data
 	private static final double METRIC_LENGTH_MOD = .3048;			//meters
 	private static final double METRIC_VELOCITY_MOD = 1.097;		//km/hr
-	private static final double METRIC_VELOCITY_MAX = 400.;			//km/hr
 	private static final double METRIC_WEIGHT_MOD = 4.448;			//Newtons
-	private static final double METRIC_WEIGHT_MAX = 500000.;		//Newtons
-	private static final double METRIC_WEIGHT_MAX_B = 2.5;			//Newtons
 	private static final double METRIC_PRESSURE_MOD = 101.3;		//kPa
 	
-	
-	//Mars Related Constants
-	//Freedom Units 
-	private static final double MARS_FREEDOM_VELOCITY_MAX = 50.;	//mph
-	
-	//Metric Units
-	private static final double MARS_METRIC_VELOCITY_MAX = 80.;		//km/hr
 
 	
 	//Converting Degrees to Radians
@@ -55,25 +40,62 @@ public class Convert {
 		return in*PID2;
 	}
 
-	public static double convLength(double in,Units u) {
+	public static double convLength(double in, Units u) {
+		double out = 0.;
 		switch(u) {
 		case FREEDOM:
-			return in*FREEDOM_LENGTH_MOD;
+			out = in*FREEDOM_LENGTH_MOD;
+			break;
 		case METRIC:
-			return in*
+			out = in*METRIC_LENGTH_MOD;
+			break;
 		}
+		return out;
 	}
 	
-	public static double convVelocity(Planet p,double in, Units u) {
+	/* double convVelocity(double, Units)
+	 * Converts Velocity to the respective units
+	 */
+	public static double convVelocity(double in, Units u) {
 		double out = 0;
-		switch(p) {
-		case EARTH:
-			out = in/FREEDOM_VELOCITY_MOD;
+		switch(u) {
+		case FREEDOM:
+			out = in * FREEDOM_VELOCITY_MOD;
 			break;
-		case MARS:
-			
+		case METRIC:
+			out = in * METRIC_VELOCITY_MOD;
 			break;
 		}
-		return in/FREEDOM_VELOCITY_MOD;
+		return out;
+	}
+	
+	/* double convWeight(double, Units)
+	 * Converts Pressure to the respective units
+	 */
+	public static double convWeight(double in, Units u) {
+		double out = 0.;
+		switch(u) {
+		case FREEDOM:
+			out = in * FREEDOM_WEIGHT_MOD;
+			break;
+		case METRIC:
+			out = in * METRIC_WEIGHT_MOD;
+		}
+		return out;
+	}
+	
+	/* double convPressure(double, Units)
+	 * Converts Pressure to the respective units
+	 */
+	public static double convPressure(double in, Units u) {
+		double out = 0;
+		switch(u) {
+		case FREEDOM:
+			out = in * FREEDOM_PRESSURE_MOD;
+			break;
+		case METRIC:
+			out = in * METRIC_PRESSURE_MOD;
+		}
+		return out;
 	}
 }

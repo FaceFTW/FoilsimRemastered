@@ -20,6 +20,26 @@ public class Constants {
 	public static final double EARTH_IDEAL_GAS_CONSTANT=1716.;
 	
 	
+	
+	//Maximum Velocity Constants
+	private static final double FREEDOM_VELOCITY_MAX = 250.;		//mph, Unknown purpose atm
+	private static final double METRIC_VELOCITY_MAX = 400.;			//km/hr
+	
+	//Maximum Force Constants
+	private static final double FREEDOM_WEIGHT_MAX = 100000.;		//lbs
+	private static final double FREEDOM_WEIGHT_MAX_B = .5;			//lbs
+	private static final double METRIC_WEIGHT_MAX = 500000.;		//Newtons
+	private static final double METRIC_WEIGHT_MAX_B = 2.5;			//Newtons
+
+	
+	//Mars Related Constants
+	//Freedom Units 
+	private static final double MARS_FREEDOM_VELOCITY_MAX = 50.;	//mph
+	
+	//Metric Units
+	private static final double MARS_METRIC_VELOCITY_MAX = 80.;		//km/hr
+
+	
 	//What are those? 
 	//TODO Research These
 
