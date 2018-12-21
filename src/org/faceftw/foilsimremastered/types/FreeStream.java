@@ -200,18 +200,20 @@ public class FreeStream {
 			viscos = Constants.MU0_AIR * 717.408/(ts0 + 198.72)*Math.pow(ts0/518.688,1.5) ;
 			break;
 		case MARS:
+			
 			break;
 		case TWO:
+			
 			break;
 		case THREE:
+			
 			break;
 		case FOUR:
+			
 			break;
 		case VENUS:
+			
 			break;
-		default:
-			break;
-
 		}
 	}
 

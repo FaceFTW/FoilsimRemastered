@@ -34,7 +34,16 @@ public class Constants {
 	public static final double FREEDOM_WEIGHT_MAX_B = .5;			//lbs
 	public static final double METRIC_WEIGHT_MAX = 500000.;			//Newtons
 	public static final double METRIC_WEIGHT_MAX_B = 2.5;			//Newtons
-
+	
+	//Coefficients of friction
+	public static final double MU0_AIR = .000000362;				//Most Likely Coefficient of Friction
+	public static final double MU0_WATER = .0000272;				//Coefficient of Friction for Water
+		
+	//rlhum constants (probably relative humidity)
+	public static final double RLHUM_WATER = 100.;
+	public static final double RLHUM_MARS = 0.0;
+	public static final double RLHUM_VENUS = 0.0;
+	public static final double RLHUM_MISC = 0.0;
 	
 	//Mars Related Constants
 	//Freedom Units 
@@ -44,9 +53,7 @@ public class Constants {
 	public static final double MARS_METRIC_VELOCITY_MAX = 80.;		//km/hr
 
 	
-	//Coefficients of friction
-	public static final double MU0_AIR = .000000362;				//Most Likely Coefficient of Friction
-	public static final double MU0_WATER = .0000272;				//Coefficient of Friction for Water
+	
 	
 	//What are those? 
 	//TODO Research These
