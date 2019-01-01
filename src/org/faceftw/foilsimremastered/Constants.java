@@ -16,6 +16,9 @@ public class Constants {
 	//Enum for representing the different layers of the Earth's atmosphere
 	public enum AtmosphereLayer{TROPHOSPHERE, STRATOSPHERE, MESOSPHERE}
 	
+	//Enum for representing the different Altitudes relative toward Mars' Orbit
+	public enum MarsAtmosphereLayer{ss}
+	
 	//Gravity Stuff
 	public static final double EARTH_GRAVITY = 32.2; // feet/(second^2)
 	

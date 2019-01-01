@@ -194,12 +194,13 @@ public class FreeStream {
 			rho = ps0/(Constants.EARTH_IDEAL_GAS_CONSTANT * ts0) ;
 
 			// Eq 1:6A  Domasch  - effect of humidity 
-
 			pvap = rlhum*(2.685+.00354*Math.pow(temf,2.245))/100.;
 			rho = (ps0 - .379*pvap)/(Constants.EARTH_IDEAL_GAS_CONSTANT * ts0) ; 
 			viscos = Constants.MU0_AIR * 717.408/(ts0 + 198.72)*Math.pow(ts0/518.688,1.5) ;
 			break;
 		case MARS:
+			//this is in mars' orbit, using oribiter data. This is from NASA findings not me
+			
 			
 			break;
 		case TWO:
