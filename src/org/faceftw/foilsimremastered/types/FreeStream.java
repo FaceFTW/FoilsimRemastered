@@ -2,7 +2,10 @@ package org.faceftw.foilsimremastered.types;
 
 import org.faceftw.foilsimremastered.Constants;
 import org.faceftw.foilsimremastered.Constants.AtmosphereLayer;
+import org.faceftw.foilsimremastered.Constants.MarsAtmosphereLayer;
 import org.faceftw.foilsimremastered.Constants.Planet;
+import org.faceftw.foilsimremastered.math.Convert;
+import org.faceftw.foilsimremastered.math.Convert.Units;
 
 /* FreeStream Class
  * =================
@@ -26,14 +29,16 @@ public class FreeStream {
 	private double rlhum; 				//Unknown purpose, used with Mars data
 
 	private Planet planet;
+	private Units units;
 
 	//TODO Check the purposes for ts0,ps0,temf,rho,pvap
 
 
 	//Constructor with parameters (Definitely may need more objects
-	public FreeStream(Planet p, double alt ) {
+	public FreeStream(Planet p, double alt, Units u ) {
 		planet = p;
 		height = alt;
+		units = u;
 	}
 
 
@@ -169,6 +174,22 @@ public class FreeStream {
 		planet = _planet;
 	}
 
+	/**
+	 * @return units
+	 */
+	public Units getUnits() {
+		return units;
+	}
+
+
+	/**
+	 * @param _units the units to set
+	 */
+	public void setUnits(Units _units) {
+		units = _units;
+	}
+
+
 	//Called during construction or after a value is changed
 	public void calculateValues() {
 		switch(planet) {
@@ -199,11 +220,25 @@ public class FreeStream {
 			viscos = Constants.MU0_AIR * 717.408/(ts0 + 198.72)*Math.pow(ts0/518.688,1.5) ;
 			break;
 		case MARS:
-			//this is in mars' orbit, using oribiter data. This is from NASA findings not me
+			//This is in reference of mars' orbit, using oribiter data. This is from NASA findings not me
+			MarsAtmosphereLayer marsLayer = findMarsAtmosphereLayer();
+			switch(marsLayer) {
+				case ABOVE_VAL:
+					ts0 = 449.36 - 1.217 * height/1000. ;
+					ps0	 = 14.62 * Math.pow(2.71828,-.00003 * height) ;
+					break;
+				case BELOW_VAL:
+					ts0 = 434.02 - .548 * height/1000. ;
+					ps0 = 14.62 * Math.pow(2.71828,-.00003 * height) ;
+					break;
+			}
 			
-			
+			rho = ps0/(Constants.MARS_IDEAL_GAS_CONSTANT*ts0) ;
+	        viscos = Constants.MU0_AIR * 717.408/(ts0 + 198.72)*Math.pow(ts0/518.688,1.5) ;
 			break;
+			
 		case TWO:
+			height = 0-Convert.convLength(height, units);
 			
 			break;
 		case THREE:
@@ -229,6 +264,17 @@ public class FreeStream {
 		}
 		if(height >= 82345.) {
 			out = AtmosphereLayer.MESOSPHERE;
+		}
+		return out;
+	}
+	
+	public MarsAtmosphereLayer findMarsAtmosphereLayer() {
+		MarsAtmosphereLayer out = MarsAtmosphereLayer.BELOW_VAL;
+		if(height>22960.) {
+			out = MarsAtmosphereLayer.ABOVE_VAL;
+		}
+		if(height<=22960.) {
+			out = MarsAtmosphereLayer.BELOW_VAL;
 		}
 		return out;
 	}

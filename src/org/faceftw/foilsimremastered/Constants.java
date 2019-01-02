@@ -17,7 +17,8 @@ public class Constants {
 	public enum AtmosphereLayer{TROPHOSPHERE, STRATOSPHERE, MESOSPHERE}
 	
 	//Enum for representing the different Altitudes relative toward Mars' Orbit
-	public enum MarsAtmosphereLayer{ss}
+	//Value reference is 22960 (mi?)
+	public enum MarsAtmosphereLayer{BELOW_VAL, ABOVE_VAL}
 	
 	//Gravity Stuff
 	public static final double EARTH_GRAVITY = 32.2; // feet/(second^2)
@@ -60,5 +61,6 @@ public class Constants {
 	
 	//What are those? 
 	//TODO Research These
-	
+	public static final double EARTH_GAMA = 1.4;					//Unknown
+	public static final double MARS_GAMA = 1.29;					//Unknown
 }
