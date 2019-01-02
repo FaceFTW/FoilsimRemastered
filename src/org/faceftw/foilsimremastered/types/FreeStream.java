@@ -26,8 +26,11 @@ public class FreeStream {
 	private double temf;				//Unknown purpose (most likely temp (kelvin unit)
 	private double rho;					//Air Density (I think)
 	private double viscos;				//Viscosity (maybe)
-	private double rlhum; 				//Unknown purpose, used with Mars data
-
+	private double rlhum; 				//Most Likely Relative Humidity
+	private double q0;					//Unknown purpose
+	private double pt0;					//Unknown purpose
+	private double vfsd;
+	
 	private Planet planet;
 	private Units units;
 
@@ -190,6 +193,54 @@ public class FreeStream {
 	}
 
 
+	/**
+	 * @return q0
+	 */
+	public double getQ0() {
+		return q0;
+	}
+
+
+	/**
+	 * @param _q0 the q0 to set
+	 */
+	public void setQ0(double _q0) {
+		q0 = _q0;
+	}
+
+
+	/**
+	 * @return pt0
+	 */
+	public double getPt0() {
+		return pt0;
+	}
+
+
+	/**
+	 * @param _pt0 the pt0 to set
+	 */
+	public void setPt0(double _pt0) {
+		pt0 = _pt0;
+	}
+
+
+	/**
+	 * @return vfsd
+	 */
+	public double getVfsd() {
+		return vfsd;
+	}
+
+
+	/**
+	 * @param _vfsd the vfsd to set
+	 */
+	public void setVfsd(double _vfsd) {
+		vfsd = _vfsd;
+	}
+
+
 	//Called during construction or after a value is changed
 	public void calculateValues() {
 		switch(planet) {
@@ -237,20 +288,32 @@ public class FreeStream {
 	        viscos = Constants.MU0_AIR * 717.408/(ts0 + 198.72)*Math.pow(ts0/518.688,1.5) ;
 			break;
 			
-		case TWO:
+		case WATER:
 			height = 0-Convert.convLength(height, units);
-			
+			rho = Constants.RHO_WATER;
+			ps0 = (2116. - rho * Constants.EARTH_GRAVITY * height) ;
+	        viscos = Constants.MU0_WATER * 717.408/(ts0 + 198.72)*Math.pow(ts0/518.688,1.5) ;
 			break;
 		case THREE:
-			
+			rho = ps0/(Constants.EARTH_IDEAL_GAS_CONSTANT*ts0) ;
+	        pvap = rlhum*(2.685+.00354*Math.pow(temf,2.245))/100.;
+	        rho = (ps0 - .379*pvap)/(Constants.EARTH_IDEAL_GAS_CONSTANT * ts0) ; 
+	        viscos = Constants.EARTH_IDEAL_GAS_CONSTANT * 717.408/(ts0 + 198.72)*Math.pow(ts0/518.688,1.5) ;
 			break;
 		case FOUR:
-			
+			ps0 = 2116.;
 			break;
 		case VENUS:
-			
+			ts0 = 1331.6 ;
+	        ps0 = 194672. ;
+
+	        rho = ps0/(Constants.VENUS_IDEAL_GAS_CONSTANT*ts0) ;
+	        viscos = Constants.MU0_AIR * 717.408/(ts0 + 198.72)*Math.pow(ts0/518.688,1.5) ;
 			break;
 		}
+		
+		q0 = .5 * rho * Math.pow(vfsd, 2);
+		pt0 = ps0 + q0;
 	}
 
 	//Used to determine the atmosphere layer given altitude

@@ -10,7 +10,7 @@ package org.faceftw.foilsimremastered;
 
 public class Constants {	
 	//Order of the enums are the same as the int values of planet in original Foilsim
-	public enum Planet{EARTH, MARS, TWO, THREE, FOUR, VENUS}
+	public enum Planet{EARTH, MARS, WATER, THREE, FOUR, VENUS}
 	
 	
 	//Enum for representing the different layers of the Earth's atmosphere
@@ -27,7 +27,7 @@ public class Constants {
 	//TODO Find any equations relating to the Ideal Gas Constant Involved (R)
 	public static final double EARTH_IDEAL_GAS_CONSTANT = 1716.;
 	public static final double MARS_IDEAL_GAS_CONSTANT = 1149.;
-	
+	public static final double VENUS_IDEAL_GAS_CONSTANT = 1149.;
 	
 	//Maximum Velocity Constants
 	public static final double FREEDOM_VELOCITY_MAX = 250.;			//mph, Unknown purpose atm
@@ -49,6 +49,10 @@ public class Constants {
 	public static final double RLHUM_VENUS = 0.0;
 	public static final double RLHUM_MISC = 0.0;
 	
+	//Density (Rho) Constants
+	public static final double RHO_WATER = 1.94;					//Still figuring out units
+	
+	
 	//Mars Related Constants
 	//Freedom Units 
 	public static final double MARS_FREEDOM_VELOCITY_MAX = 50.;		//mph
@@ -63,4 +67,5 @@ public class Constants {
 	//TODO Research These
 	public static final double EARTH_GAMA = 1.4;					//Unknown
 	public static final double MARS_GAMA = 1.29;					//Unknown
+	public static final double VENUS_GAMA = 1.29;					//Unknown
 }
