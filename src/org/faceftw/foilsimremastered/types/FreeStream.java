@@ -312,7 +312,7 @@ public class FreeStream {
 			break;
 		}
 		
-		q0 = .5 * rho * Math.pow(vfsd, 2);
+		q0 = Convert.convLength(.5 * rho * Math.pow(vfsd, 2),units);
 		pt0 = ps0 + q0;
 	}
 

@@ -14,7 +14,7 @@ public class Convert {
 	
 	//Some conversion factors
 	private static final double D2R = Math.PI/180.;					//Degrees to Radians
-	private static final double PID2 = Math.PI/2.0;					//Unknown at the moment
+	private static final double HALF_PI = Math.PI/2.0;				//Constant for Pi/2
 	
 	//For Freedom Units given input data
 	private static final double FREEDOM_LENGTH_MOD  = 1;			//Feet
@@ -35,10 +35,11 @@ public class Convert {
 		return in*D2R;
 	}
 	
-	//Unknown Conversion, temporary placeholder
-	public static double convPid2(double in) {
-		return in*PID2;
+	//Converting Radians to Degrees
+	public static double RadtoDeg(double in) {
+		return in/D2R;
 	}
+	
 
 	public static double convLength(double in, Units u) {
 		double out = 0.;

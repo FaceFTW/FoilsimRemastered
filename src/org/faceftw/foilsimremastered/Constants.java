@@ -20,6 +20,9 @@ public class Constants {
 	//Value reference is 22960 (mi?)
 	public enum MarsAtmosphereLayer{BELOW_VAL, ABOVE_VAL}
 	
+	//Enum for the different Airfoil Types
+	public enum Airfoil{JUOKOWSKI, ELLIPTICAL, PLATE, ROT_CYLINDER, ROT_BALL}
+	
 	//Gravity Stuff
 	public static final double EARTH_GRAVITY = 32.2; // feet/(second^2)
 	
