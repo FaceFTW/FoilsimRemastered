@@ -2,6 +2,7 @@ package org.faceftw.foilsimremastered.types;
 
 import org.faceftw.foilsimremastered.Constants.Airfoil;
 import org.faceftw.foilsimremastered.math.Convert;
+import org.faceftw.foilsimremastered.math.Convert.Units;
 
 public class KuttaCirculation {
 	
@@ -18,8 +19,44 @@ public class KuttaCirculation {
 	private double thkval;
 	private double gamval;
 	private double alfval;
+	private double radius;
+	private double spin;
+	private double spindir;
+	private double vfsd;
+	private double nptc;
+	private Units unit;
+	
+	//Geometry stuff. Seperating to prevent any confusion during debugging
+	private double[][] xg0;
+	private double[][] yg0;
+	private double[][] rg0;
+	private double[][] thg;
+	private double[][] xm;
+	private double[][] ym;
+	private double[] plp;
+	private double[] plv;
+	
+	private double xt1;
+	private double yt1;
+	private double xt2;
+	private double yt2;
+	private double spanfac;
 	
 	
+	/**
+	 * @return radius
+	 */
+	public double getRadius() {
+		return radius;
+	}
+
+	/**
+	 * @param _radius the radius to set
+	 */
+	public void setRadius(double _radius) {
+		radius = _radius;
+	}
+
 	/**
 	 * @return thet
 	 */
@@ -222,20 +259,38 @@ public class KuttaCirculation {
             gamval = 2.0*rval*Math.sin(Convert.DegtoRad((alfval+beta))) ;
 			break;
 		case PLATE:
+			ycval = camval / 2.0 ;
+            rval = Math.sqrt(ycval*ycval+1.0);
+            beta = Convert.RadtoDeg(Math.asin(ycval/rval)) ;    /* Kutta condition */
+            gamval = 2.0*rval*Math.sin(Convert.DegtoRad(alfval+beta)) ;
 			break;
 		case ROT_CYLINDER:
-			break;
 		case ROT_BALL:
+			//Apparently, the original foilsim has these two conditions split up during Kutta Calcualtions.
+			//Yet the code remains the same
+			//Keeping a note for this atm, will look for discrepancy when testing
+			rval = Convert.convLength(radius, unit);
+            gamval = 4.0 * 3.1415926 * 3.1415926 *spin * rval * rval/(Convert.convVelocity(vfsd, unit));
+            gamval = gamval * spindir ;
+            ycval = .0001 ;
 			break;
 		default:
 			break;
 		
 		}
+		
+		//Seperated geometry calculations because its just messy man
+		createGeometry();
 	}
 	
 	public void createGeometry() {
 		//This may get kinda messy
 		//TODO Do stuff with this method
+		
+		for(index = 1; index <= nptc; index++) {
+			thet = (index - 1) * 360./(nptc-1);
+			
+		}
 	}
 
 }
