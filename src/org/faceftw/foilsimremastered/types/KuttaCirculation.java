@@ -276,7 +276,6 @@ public class KuttaCirculation {
 			break;
 		default:
 			break;
-		
 		}
 		
 		//Seperated geometry calculations because its just messy man
@@ -285,8 +284,7 @@ public class KuttaCirculation {
 	
 	public void createGeometry() {
 		//This may get kinda messy
-		//TODO Do stuff with this method
-		
+		//TODO Finish everything after implementing getVel()
 		for(index = 1; index <= nptc; index++) {
 			thet = (index - 1) * 360./(nptc-1);
 			xg[0][index] = rval * Math.cos(Convert.DegtoRad(thet)) + xcval;
@@ -297,7 +295,7 @@ public class KuttaCirculation {
 			ym[0][index] = (rg[0][index] - (1.0/rg[0][index])) * Math.sin(Convert.DegtoRad(thg[0][index]));
 			rdm = Math.sqrt(Math.pow(xm[0][index], 2) + Math.pow(ym[0][index], 2));
 			thtm = Convert.RadtoDeg(Math.atan2(ym[0][index], xm[0][index]));
-			
+			//Insert getVel() here when ready :)
 		}
 	}
 

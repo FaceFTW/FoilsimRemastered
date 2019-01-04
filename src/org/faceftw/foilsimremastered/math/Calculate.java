@@ -7,15 +7,16 @@ public class Calculate {
 	
 	//public double[] getVel( Params still pending atm)
 	//This returns calculations for the velocity & pressure and any bundled vars I feel necessary
-	public double[] getVel(double rad, double theta, Airfoil foil) {
+	//TODO Clean up params and returns as more is implemented
+	public double[] getVel(double rad, double theta, Airfoil foil, double _rval, double _gamval, double _xcval, double _ycval, double _alfval, double _usq, double _vsq) {
 		//Vars not in the method that are needed for calculation **COMMENTEED FOR ORGANIZATION PURPOSES**
-		double rval;
-		double gamval;
-		double xcval;
-		double ycval;
+		double rval = _rval;
+		double gamval = _gamval;
+		double xcval = _xcval;
+		double ycval = _ycval;
 		//double usq;
 		//double vsq;
-		double alfval;
+		double alfval = _alfval;
 		
 		//A bunch of vars here ohboy
 		double ur = 0;
@@ -33,9 +34,9 @@ public class Calculate {
 		//Variables that will be returned in the Array (In order descending for the index of the value)
 		double vel = 0;			//Index 0, Velocity
 		double pres = 0;		//Index 1, Pressure
-		double usq;				//Index 2, Something Squared
-		double vsq;				//Index 3, Velocity Squared
-		double vxdir;			//Index 4, Velocity Direction?
+		double usq = _usq;				//Index 2, Something Squared
+		double vsq = _vsq;				//Index 3, Velocity Squared
+		double vxdir = 0;			//Index 4, Velocity Direction?
 		
 		
 		thrad = Convert.DegtoRad(theta);
