@@ -27,9 +27,9 @@ public class KuttaCirculation {
 	private Units unit;
 	
 	//Geometry stuff. Seperating to prevent any confusion during debugging
-	private double[][] xg0;
-	private double[][] yg0;
-	private double[][] rg0;
+	private double[][] xg;
+	private double[][] yg;
+	private double[][] rg;
 	private double[][] thg;
 	private double[][] xm;
 	private double[][] ym;
@@ -289,6 +289,14 @@ public class KuttaCirculation {
 		
 		for(index = 1; index <= nptc; index++) {
 			thet = (index - 1) * 360./(nptc-1);
+			xg[0][index] = rval * Math.cos(Convert.DegtoRad(thet)) + xcval;
+			yg[0][index] = rval * Math.sin(Convert.DegtoRad(thet)) + ycval;
+			rg[0][index] = Math.sqrt(Math.pow(xg[0][index], 2) + Math.pow(yg[0][index], 2));
+			thg[0][index] = Convert.RadtoDeg(Math.atan2(yg[0][index], xg[0][index]));
+			xm[0][index] = (rg[0][index] + (1.0/rg[0][index])) * Math.cos(Convert.DegtoRad(thg[0][index]));
+			ym[0][index] = (rg[0][index] - (1.0/rg[0][index])) * Math.sin(Convert.DegtoRad(thg[0][index]));
+			rdm = Math.sqrt(Math.pow(xm[0][index], 2) + Math.pow(ym[0][index], 2));
+			thtm = Convert.RadtoDeg(Math.atan2(ym[0][index], xm[0][index]));
 			
 		}
 	}
